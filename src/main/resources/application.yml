@@ -9,13 +9,21 @@ endpoints:
   health:
     sensitive: false
 
+ribbon:
+  eureka:
+     enabled: false
+
 zuul:
+  host:
+    socket-timeout-millis: 30000
   routes:
-    stores: /stores/**
-    customers: /customers/**
+    server:
+      path: /**
+      stripPrefix: false
+      url: https://account-huami.mi-ae.cn:443
 
 server:
-  port: 8765
+  port: 8080
 
 logging:
   level:
