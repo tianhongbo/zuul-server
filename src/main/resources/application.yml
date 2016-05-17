@@ -2,10 +2,11 @@ info:
   component: Zuul Server
   
 endpoints:
+  enabled: false
   restart:
-    enabled: true
+    enabled: false
   shutdown:
-    enabled: true
+    enabled: false
   health:
     sensitive: false
 
@@ -15,17 +16,13 @@ ribbon:
 
 zuul:
   host:
+    # this value need to be big enough because internal search interface sometimes is very slow.
     socket-timeout-millis: 30000
   routes:
-    server:
+    account:
       path: /**
       stripPrefix: false
       url: https://account-huami.mi-ae.cn:443
 
 server:
   port: 8080
-
-logging:
-  level:
-    ROOT: INFO
-    org.springframework.web: DEBUG
