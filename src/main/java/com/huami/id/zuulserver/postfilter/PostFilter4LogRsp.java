@@ -1,6 +1,5 @@
 package com.huami.id.zuulserver.postfilter;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
@@ -35,7 +34,7 @@ public class PostFilter4LogRsp extends ZuulFilter {
 
   @Override
   public boolean shouldFilter() {
-    // Always enable logging req
+    // Always enable logging rsp
     return true;
   }
 
@@ -45,11 +44,16 @@ public class PostFilter4LogRsp extends ZuulFilter {
 
     Map<String, String> zuulReqHeaders = ctx.getZuulRequestHeaders();
     List<Pair<String, String>> originRspHeaders = ctx.getOriginResponseHeaders();
+    int originRspStatusCode = ctx.getResponse().getStatus();
     List<Pair<String, String>> zuulRspHeaders = ctx.getZuulResponseHeaders();
+    int zuulRspStatusCode = ctx.getResponseStatusCode();
 
-    log.info("eventType=\"forward request\", " + "host=\"" + ctx.getRouteHost() + "\", " + StringUtils.join(FilterUtil.mapToList(zuulReqHeaders), ", "));
-    log.info("eventType=\"receive response\", " + StringUtils.join(FilterUtil.pairToList(originRspHeaders), ", "));
-    log.info("eventType=\"forward response\", " + StringUtils.join(FilterUtil.pairToList(zuulRspHeaders), ", "));
+    log.info("eventType=\"forward request\", " + "host=\"" + ctx.getRouteHost() + "\", "
+        + StringUtils.join(FilterUtil.mapToList(zuulReqHeaders), ", "));
+    log.info("eventType=\"receive response\", rspStatusCode=" + originRspStatusCode + ", rspContentLen="
+        + ctx.getOriginContentLength() + ", " + StringUtils.join(FilterUtil.pairToList(originRspHeaders), ", "));
+    log.info("eventType=\"forward response\", rspStatusCode=" + zuulRspStatusCode + ", "
+        + StringUtils.join(FilterUtil.pairToList(zuulRspHeaders), ", "));
     return null;
   }
 

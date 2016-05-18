@@ -17,7 +17,7 @@ ribbon:
 zuul:
   host:
     # this value need to be big enough because internal search interface sometimes is very slow.
-    socket-timeout-millis: 30000
+    socket-timeout-millis: 10000
   routes:
     account:
       path: /**
