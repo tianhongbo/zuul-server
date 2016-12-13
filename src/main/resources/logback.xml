@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration>
 <configuration>
-  <property name="PROJECT_NAME" value="huami.zuul" />
-  <property name="PATH_DIR" value="/var/log/huami" />
+  <property name="PROJECT_NAME" value="www.zuul" />
+  <property name="PATH_DIR" value="/var/log/www" />
 
   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
