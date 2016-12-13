@@ -22,7 +22,7 @@ zuul:
     account:
       path: /**
       stripPrefix: false
-      url: https://account-huami.mi-ae.cn:443
+      url: https://sample.com:443
 
 server:
   port: 8080
